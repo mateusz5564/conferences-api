@@ -1,12 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using Conferences.Infrastructure.Extensions;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var app = builder.Build();
+builder.Services.AddInfrastructure(builder.Configuration);
 
-// Configure the HTTP request pipeline.
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 
