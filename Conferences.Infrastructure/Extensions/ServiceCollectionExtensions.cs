@@ -1,5 +1,6 @@
 ﻿
 using Conferences.Infrastructure.Persistence;
+using Conferences.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ namespace Conferences.Infrastructure.Extensions
                     options.UseSqlServer(configuration.GetConnectionString("Default"),
                     x => x.UseNetTopologySuite()
                 ));
+
+            services.AddScoped<ICategorySeeder, CategorySeeder>();
         }
     }
 }
