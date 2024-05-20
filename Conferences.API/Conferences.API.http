@@ -1,6 +1,11 @@
-@Conferences.API_HostAddress = http://localhost:5005
+@Conferences.API_HostAddress = https://localhost:7099
 
-GET {{Conferences.API_HostAddress}}/weatherforecast/
+GET {{Conferences.API_HostAddress}}/api/conferences
+Accept: application/json
+
+###
+
+GET {{Conferences.API_HostAddress}}/api/conferences/5
 Accept: application/json
 
 ###

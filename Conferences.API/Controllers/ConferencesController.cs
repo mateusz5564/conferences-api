@@ -14,5 +14,18 @@ namespace Conferences.API.Controllers
 
             return Ok(conferences);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var conference = await conferencesService.GetConferenceById(id);
+
+            if (conference == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(conference);
+        }
     }
 }
