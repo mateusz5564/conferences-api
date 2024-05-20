@@ -1,4 +1,5 @@
 ﻿using Conferences.Application.Conferences;
+using Conferences.Application.Conferences.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conferences.API.Controllers
@@ -26,6 +27,14 @@ namespace Conferences.API.Controllers
             }
 
             return Ok(conference);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateConferenceDto createConferenceDto)
+        {
+            var id = await conferencesService.CreateConference(createConferenceDto);
+
+            return CreatedAtAction(nameof(GetById), new { id }, null);
         }
     }
 }

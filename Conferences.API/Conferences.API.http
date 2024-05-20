@@ -9,3 +9,22 @@ GET {{Conferences.API_HostAddress}}/api/conferences/5
 Accept: application/json
 
 ###
+
+POST {{Conferences.API_HostAddress}}/api/conferences
+Content-Type: application/json
+
+{
+  "title": "Test Conference Title",
+  "description": "The best conference in the world",
+  "logoUrl": "https://placehold.co/600x400",
+  "startDate": "2024-06-14T11:00:00",
+  "endDate": "2024-06-16T17:00:00",
+  "location": {
+    "latitude": 20,
+    "longitude": 20
+  },
+  "websiteUrl": "https://www.google.com/",
+  "categoryId": "8"
+}
+
+###

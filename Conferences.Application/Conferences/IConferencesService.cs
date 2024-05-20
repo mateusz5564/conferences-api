@@ -6,5 +6,6 @@ namespace Conferences.Application.Conferences
     {
         Task<IEnumerable<ConferenceDto>> GetAllConferences();
         Task<ConferenceDto?> GetConferenceById(int id);
+        Task<int> CreateConference(CreateConferenceDto conferenceDto);
     }
 }

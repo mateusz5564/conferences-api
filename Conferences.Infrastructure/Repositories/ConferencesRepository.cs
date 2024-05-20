@@ -20,5 +20,13 @@ namespace Conferences.Infrastructure.Repositories
 
             return conference;
         }
+
+        public async Task<int> CreateAsync(Conference conference)
+        {
+            dbContext.Conferences.Add(conference);
+            await dbContext.SaveChangesAsync();
+
+            return conference.Id;
+        }
     }
 }
