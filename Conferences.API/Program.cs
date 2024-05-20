@@ -1,11 +1,14 @@
 using Conferences.Infrastructure.Extensions;
 using Conferences.Infrastructure.Seeders;
+using Conferences.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

@@ -1,5 +1,7 @@
 ﻿
+using Conferences.Domain.Repositories;
 using Conferences.Infrastructure.Persistence;
+using Conferences.Infrastructure.Repositories;
 using Conferences.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +19,7 @@ namespace Conferences.Infrastructure.Extensions
                 ));
 
             services.AddScoped<ICategorySeeder, CategorySeeder>();
+            services.AddScoped<IConferencesRepository, ConferencesRepository>();
         }
     }
 }
