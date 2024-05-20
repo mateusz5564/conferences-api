@@ -1,4 +1,6 @@
 ﻿using Conferences.Application.Conferences;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Conferences.Application.Extensions
@@ -7,8 +9,12 @@ namespace Conferences.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
+            var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
+
             services.AddScoped<IConferencesService, ConferencesService>();
             services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
+            services.AddValidatorsFromAssembly(applicationAssembly)
+                .AddFluentValidationAutoValidation();   
         }
     }
 }
