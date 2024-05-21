@@ -1,4 +1,5 @@
 ﻿using Conferences.Application.Conferences.Commands.CreateConference;
+using Conferences.Application.Conferences.Commands.DeleteConference;
 using Conferences.Application.Conferences.Queries.GetAllConferences;
 using Conferences.Application.Conferences.Queries.GetConferenceById;
 using MediatR;
@@ -37,6 +38,16 @@ namespace Conferences.API.Controllers
             var id = await mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id }, null);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var isDeleted = await mediator.Send(new DeleteConferenceCommand(id));
+
+            if(!isDeleted) return NotFound();
+
+            return NoContent();
         }
     }
 }

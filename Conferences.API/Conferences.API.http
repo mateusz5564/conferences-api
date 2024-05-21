@@ -28,3 +28,7 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE {{Conferences.API_HostAddress}}/api/conferences/16
+
+###

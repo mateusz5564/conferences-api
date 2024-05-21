@@ -28,5 +28,11 @@ namespace Conferences.Infrastructure.Repositories
 
             return conference.Id;
         }
+
+        public async Task DeleteAsync(Conference conference)
+        {
+            dbContext.Conferences.Remove(conference);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }
