@@ -1,17 +1,19 @@
-﻿using Conferences.Application.Conferences;
-using Conferences.Application.Conferences.Dtos;
+﻿using Conferences.Application.Conferences.Commands.CreateConference;
+using Conferences.Application.Conferences.Queries.GetAllConferences;
+using Conferences.Application.Conferences.Queries.GetConferenceById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conferences.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ConferencesController(IConferencesService conferencesService) : ControllerBase
+    public class ConferencesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var conferences = await conferencesService.GetAllConferences();
+            var conferences = await mediator.Send(new GetAllConferencesQuery());
 
             return Ok(conferences);
         }
@@ -19,7 +21,7 @@ namespace Conferences.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var conference = await conferencesService.GetConferenceById(id);
+            var conference = await mediator.Send(new GetConferenceByIdQuery(id));
 
             if (conference == null)
             {
@@ -30,9 +32,9 @@ namespace Conferences.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateConferenceDto createConferenceDto)
+        public async Task<IActionResult> Create([FromBody] CreateConferenceCommand command)
         {
-            var id = await conferencesService.CreateConference(createConferenceDto);
+            var id = await mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id }, null);
         }

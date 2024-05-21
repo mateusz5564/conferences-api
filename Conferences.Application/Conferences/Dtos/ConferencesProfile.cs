@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Conferences.Application.Conferences.Commands.CreateConference;
 using Conferences.Domain.Entities;
 using NetTopologySuite.Geometries;
 
@@ -14,7 +15,7 @@ namespace Conferences.Application.Conferences.Dtos
                 .ForMember(dto => dto.Longitude, options => options.MapFrom(src => src.Coordinate.X))
                 .ForMember(dto => dto.Latitude, options => options.MapFrom(src => src.Coordinate.Y));
 
-            CreateMap<CreateConferenceDto, Conference>()
+            CreateMap<CreateConferenceCommand, Conference>()
                 .ForMember(
                     conf => conf.Location,
                     options => options.MapFrom(src =>

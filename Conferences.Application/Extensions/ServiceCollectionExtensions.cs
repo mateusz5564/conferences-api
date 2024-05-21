@@ -1,5 +1,4 @@
-﻿using Conferences.Application.Conferences;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,10 +10,10 @@ namespace Conferences.Application.Extensions
         {
             var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
 
-            services.AddScoped<IConferencesService, ConferencesService>();
             services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
             services.AddValidatorsFromAssembly(applicationAssembly)
-                .AddFluentValidationAutoValidation();   
+                .AddFluentValidationAutoValidation();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
         }
     }
 }

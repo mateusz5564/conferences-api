@@ -1,12 +1,11 @@
-﻿using Conferences.Application.Conferences.Dtos;
-using FluentValidation;
+﻿using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace Conferences.Application.Conferences.Validators
+namespace Conferences.Application.Conferences.Commands.CreateConference
 {
-    public class CreateRestaurantDtoValidator : AbstractValidator<CreateConferenceDto>
+    public class CreateRestaurantCommandValidator : AbstractValidator<CreateConferenceCommand>
     {
-        public CreateRestaurantDtoValidator()
+        public CreateRestaurantCommandValidator()
         {
             RuleFor(dto => dto.Title).Length(2, 100);
 
@@ -43,6 +42,8 @@ namespace Conferences.Application.Conferences.Validators
 
         private bool BeAValidUrl(string? url)
         {
+            if(string.IsNullOrEmpty(url)) return true;
+
             string urlPattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
             Regex Rgx = new Regex(urlPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return Rgx.IsMatch(url);
