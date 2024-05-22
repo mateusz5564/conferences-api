@@ -24,11 +24,23 @@ Content-Type: application/json
     "longitude": 20
   },
   "websiteUrl": "https://www.google.com/",
-  "categoryId": "8"
+  "categoryId": 8
 }
 
 ###
 
 DELETE {{Conferences.API_HostAddress}}/api/conferences/16
+
+###
+
+PATCH {{Conferences.API_HostAddress}}/api/conferences/17
+Content-Type: application/json
+
+{
+  "title": "New title",
+  "location": {
+    "longitude": -18
+  }
+}
 
 ###

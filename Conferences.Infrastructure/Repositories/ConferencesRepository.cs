@@ -34,5 +34,10 @@ namespace Conferences.Infrastructure.Repositories
             dbContext.Conferences.Remove(conference);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

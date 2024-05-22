@@ -9,5 +9,6 @@ namespace Conferences.Domain.Repositories
         Task<Conference?> GetByIdAsync(int id);
         Task<int> CreateAsync(Conference conference);
         Task DeleteAsync(Conference conference);
+        Task SaveChangesAsync();
     }
 }
