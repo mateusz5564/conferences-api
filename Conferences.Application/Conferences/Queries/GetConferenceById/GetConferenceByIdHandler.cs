@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Conferences.Application.Conferences.Dtos;
+using Conferences.Domain.Entities;
+using Conferences.Domain.Exceptions;
 using Conferences.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -13,7 +15,8 @@ namespace Conferences.Application.Conferences.Queries.GetConferenceById
         {
             logger.LogInformation("Getting conference with id: {ConferenceId}", request.Id);
 
-            var conference = await conferencesRepository.GetByIdAsync(request.Id);
+            var conference = await conferencesRepository.GetByIdAsync(request.Id)
+                ?? throw new NotFoundException(nameof(Conference), request.Id.ToString());
 
             var conferenceDto = mapper.Map<ConferenceDto>(conference);
 

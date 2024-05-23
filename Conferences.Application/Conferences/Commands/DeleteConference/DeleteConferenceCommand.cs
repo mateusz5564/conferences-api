@@ -2,7 +2,7 @@
 
 namespace Conferences.Application.Conferences.Commands.DeleteConference
 {
-    public class DeleteConferenceCommand(int id) : IRequest<bool>
+    public class DeleteConferenceCommand(int id) : IRequest
     {
         public int Id { get; } = id;
     }

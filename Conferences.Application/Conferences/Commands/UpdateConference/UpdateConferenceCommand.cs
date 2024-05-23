@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Conferences.Application.Conferences.Commands.UpdateConference
 {
-    public class UpdateConferenceCommand : IRequest<bool>
+    public class UpdateConferenceCommand : IRequest
     {
         public int Id { get; set; }
 

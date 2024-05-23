@@ -1,6 +1,7 @@
 ﻿using Conferences.Application.Conferences.Commands.CreateConference;
 using Conferences.Application.Conferences.Commands.DeleteConference;
 using Conferences.Application.Conferences.Commands.UpdateConference;
+using Conferences.Application.Conferences.Dtos;
 using Conferences.Application.Conferences.Queries.GetAllConferences;
 using Conferences.Application.Conferences.Queries.GetConferenceById;
 using MediatR;
@@ -13,7 +14,7 @@ namespace Conferences.API.Controllers
     public class ConferencesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<ConferenceDto>>> GetAll()
         {
             var conferences = await mediator.Send(new GetAllConferencesQuery());
 
@@ -21,15 +22,11 @@ namespace Conferences.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ConferenceDto>> GetById([FromRoute] int id)
         {
             var conference = await mediator.Send(new GetConferenceByIdQuery(id));
-
-            if (conference == null)
-            {
-                return NotFound();
-            }
-
             return Ok(conference);
         }
 
@@ -42,23 +39,21 @@ namespace Conferences.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var isDeleted = await mediator.Send(new DeleteConferenceCommand(id));
-
-            if(!isDeleted) return NotFound();
-
+            await mediator.Send(new DeleteConferenceCommand(id));
             return NoContent();
         }
 
         [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateConferenceCommand command)
         {
             command.Id = id;
-            var isUpdated = await mediator.Send(command);
-
-            if(!isUpdated) return NotFound();
-
+            await mediator.Send(command);
             return NoContent();
         }
     }
