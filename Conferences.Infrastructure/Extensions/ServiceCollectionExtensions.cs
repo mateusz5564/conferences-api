@@ -20,6 +20,7 @@ namespace Conferences.Infrastructure.Extensions
 
             services.AddScoped<ICategorySeeder, CategorySeeder>();
             services.AddScoped<IConferencesRepository, ConferencesRepository>();
+            services.AddScoped<IImportantDatesRepository, ImportantDatesRepository>();
         }
     }
 }
