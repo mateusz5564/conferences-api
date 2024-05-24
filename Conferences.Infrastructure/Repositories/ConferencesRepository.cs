@@ -9,14 +9,20 @@ namespace Conferences.Infrastructure.Repositories
     {
         public async Task<IEnumerable<Conference>> GetAllAsync()
         {
-            var conferences = await dbContext.Conferences.Include(x => x.Category).ToListAsync();
+            var conferences = await dbContext.Conferences
+                .Include(x => x.Category)
+                .Include(x => x.ImportantDates)
+                .ToListAsync();
 
             return conferences;
         }
 
         public async Task<Conference?> GetByIdAsync(int id)
         {
-            var conference = await dbContext.Conferences.Include(x => x.Category).FirstOrDefaultAsync(c => c.Id == id);
+            var conference = await dbContext.Conferences
+                .Include(x => x.Category)
+                .Include(x => x.ImportantDates)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             return conference;
         }

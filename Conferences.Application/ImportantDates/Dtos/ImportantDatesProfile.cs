@@ -9,6 +9,8 @@ namespace Conferences.Application.ImportantDates.Dtos
         public ImportantDatesProfile()
         {
             CreateMap<CreateImportantDateCommand, ImportantDate>();
+
+            CreateMap<ImportantDate, ImportantDateDto>();
         }
     }
 }

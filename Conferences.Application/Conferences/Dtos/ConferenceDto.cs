@@ -1,4 +1,5 @@
 ﻿using Conferences.Application.Categories.Dtos;
+using Conferences.Application.ImportantDates.Dtos;
 
 namespace Conferences.Application.Conferences.Dtos
 {
@@ -14,5 +15,6 @@ namespace Conferences.Application.Conferences.Dtos
         public bool IsAccepted { get; set; }
         public string? WebsiteUrl { get; set; }
         public CategoryDto Category { get; set; } = default!;
+        public List<ImportantDateDto> ImportantDates { get; set; } = [];
     }
 }
