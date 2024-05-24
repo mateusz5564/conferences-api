@@ -8,5 +8,6 @@ namespace Conferences.Infrastructure.Persistence
     {
         public DbSet<Conference> Conferences { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ImportantDate> ImportantDates { get; set; }
     }
 }

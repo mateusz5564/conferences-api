@@ -17,5 +17,6 @@ namespace Conferences.Domain.Entities
 
         public int CategoryId { get; set; }
         public Category Category { get; set; } = default!;
+        public List<ImportantDate> ImportantDates { get; set; } = [];
     }
 }
