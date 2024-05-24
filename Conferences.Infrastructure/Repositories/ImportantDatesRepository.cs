@@ -8,7 +8,7 @@ namespace Conferences.Infrastructure.Repositories
     {
         public async Task<int> CreateAsync(ImportantDate importantDate)
         {
-            dbContext.Add(importantDate);
+            dbContext.ImportantDates.Add(importantDate);
             await dbContext.SaveChangesAsync();
 
             return importantDate.Id;
