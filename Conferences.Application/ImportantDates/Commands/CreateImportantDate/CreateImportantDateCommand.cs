@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Conferences.Application.ImportantDates.Commands
+namespace Conferences.Application.ImportantDates.Commands.CreateImportantDate
 {
     public class CreateImportantDateCommand() : IRequest<int>
     {

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Conferences.Application.ImportantDates.Commands
+namespace Conferences.Application.ImportantDates.Commands.CreateImportantDate
 {
     public class CreateImportantDateValidator : AbstractValidator<CreateImportantDateCommand>
     {

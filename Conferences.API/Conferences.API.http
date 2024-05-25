@@ -62,3 +62,7 @@ GET {{Conferences.API_HostAddress}}/api/conferences/5/important-dates
 GET {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
 
 ###
+
+DELETE {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
+
+###

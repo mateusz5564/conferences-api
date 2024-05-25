@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Conferences.Application.ImportantDates.Commands;
+using Conferences.Application.ImportantDates.Commands.CreateImportantDate;
 using Conferences.Domain.Entities;
 
 namespace Conferences.Application.ImportantDates.Dtos

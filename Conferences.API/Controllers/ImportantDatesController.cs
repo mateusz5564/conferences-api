@@ -1,4 +1,5 @@
-﻿using Conferences.Application.ImportantDates.Commands;
+﻿using Conferences.Application.ImportantDates.Commands.CreateImportantDate;
+using Conferences.Application.ImportantDates.Commands.DeleteImportantDateForConferenceById;
 using Conferences.Application.ImportantDates.Dtos;
 using Conferences.Application.ImportantDates.Queries.GetAllImportantDatesForConference;
 using Conferences.Application.ImportantDates.Queries.GetImportantDateForConferenceById;
@@ -30,7 +31,7 @@ namespace Conferences.API.Controllers
             [FromRoute] int conferenceId, [FromRoute] int importantDateId)
         {
             var importantDate = await mediator
-                .Send(new GetImportantDateForConferenceByIdQuery(conferenceId, 
+                .Send(new GetImportantDateForConferenceByIdQuery(conferenceId,
                 importantDateId));
 
             return Ok(importantDate);
@@ -45,6 +46,20 @@ namespace Conferences.API.Controllers
 
             return Created();
         }
+
+        [HttpDelete("{importantDateId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteForConferenceById(
+            [FromRoute] int conferenceId, [FromRoute] int importantDateId)
+        {
+            await mediator
+                .Send(new DeleteImportantDateForConferenceByIdCommand(conferenceId,
+                importantDateId));
+
+            return NoContent();
+        }
+
     }
 }
 

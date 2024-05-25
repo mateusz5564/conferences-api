@@ -13,5 +13,11 @@ namespace Conferences.Infrastructure.Repositories
 
             return importantDate.Id;
         }
+
+        public async Task DeleteAsync(ImportantDate importantDate)
+        {
+            dbContext.ImportantDates.Remove(importantDate);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

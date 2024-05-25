@@ -5,7 +5,7 @@ using Conferences.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Conferences.Application.ImportantDates.Commands
+namespace Conferences.Application.ImportantDates.Commands.CreateImportantDate
 {
     public class CreateImportantDateHandler(IMapper mapper,
         ILogger<CreateImportantDateHandler> logger,
@@ -19,7 +19,7 @@ namespace Conferences.Application.ImportantDates.Commands
                 " for conference with id {id}",
                 request, request.ConferenceId);
 
-            var conference = await conferencesRepository.GetByIdAsync(request.ConferenceId) 
+            var conference = await conferencesRepository.GetByIdAsync(request.ConferenceId)
                 ?? throw new NotFoundException(nameof(Conference), request.ConferenceId.ToString());
 
             var importantDate = mapper.Map<ImportantDate>(request);
