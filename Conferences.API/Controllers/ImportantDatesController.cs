@@ -42,9 +42,10 @@ namespace Conferences.API.Controllers
             [FromBody] CreateImportantDateCommand command)
         {
             command.ConferenceId = conferenceId;
-            await mediator.Send(command);
+            var importantDateId = await mediator.Send(command);
 
-            return Created();
+            return CreatedAtAction(nameof(GetForConferenceById), 
+                new { conferenceId, importantDateId }, null);
         }
 
         [HttpDelete("{importantDateId}")]
