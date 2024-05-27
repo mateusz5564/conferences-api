@@ -1,4 +1,5 @@
 @Conferences.API_HostAddress = https://localhost:7099
+@token = CfDJ8H6f0PVOH8VHooLBybin6seL35jZWYCobF3LqkPsmGXx2vZk7Oc4QfUr83wDfg0ec6Tji3xIgiGxUm8vvdoVr39nkdoGtUS41yguQBsVNW905_-7wIVRrAtV-2DxkXYdJ5vnMhclkQrC-fPIgAJeKTfpM8VS-8RHkiE07XCTl2ppNz3wj63jc5CKL_sQgwifzZpFIZY02BBVdFL3k2l3HPxxCLax5Ue5pRJRU2GPKNyLgliAVW0dIElk6ArfPnJE-jLI8ehAp0PNYSzM_nNCfjdu9ut5YM_VO2yPyCx0gebkLAB-mbB250SkCKqoqCHbzMg2uU66PufYhRirMpnjE71GBHZHq0RropPXPP8kStPD4LRYAfqxYpaZbYbN6-WKTwRgZFMkJQnTCQoKYBtJQjigXsQL6lBwQlbja3FPn8LtpNSLTT8q4vytKHeTZelipjccacoE1lJeVS4eljDzO0Qh5pYHL42sjJ7GyIEsPUU64EJc23Z4EXngWX-SD8zkTtezaj-Z3SFj5PMLSswbCGqErs40O_vdRIujeFenLlcOZuu7an7dUUeSj6gEAClucq21OSA04dBBve2eDPcZXI34LXqqCbKEN4ItK6wpVBZZapRFWV06uMnUxi8EKN6GfBf-Xoi7KpKSpRLYK8m_y-0ccBO8B9vepc81_ugWTUejldPV2NhT_-8KBWEk5yz_jg
 
 GET {{Conferences.API_HostAddress}}/api/conferences
 Accept: application/json
@@ -12,6 +13,7 @@ Accept: application/json
 
 POST {{Conferences.API_HostAddress}}/api/conferences
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Test Conference Title",
@@ -67,7 +69,7 @@ DELETE {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
 
 ###
 
-POST {{Conferences.API_HostAddress}}/register
+POST {{Conferences.API_HostAddress}}/api/identity/register
 Content-Type: application/json
 
 {
@@ -77,7 +79,7 @@ Content-Type: application/json
 
 ###
 
-POST {{Conferences.API_HostAddress}}/login
+POST {{Conferences.API_HostAddress}}/api/identity/login
 Content-Type: application/json
 
 {

@@ -5,15 +5,18 @@ using Conferences.Application.Conferences.Dtos;
 using Conferences.Application.Conferences.Queries.GetAllConferences;
 using Conferences.Application.Conferences.Queries.GetConferenceById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conferences.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ConferencesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ConferenceDto>>> GetAll()
         {
             var conferences = await mediator.Send(new GetAllConferencesQuery());
@@ -22,6 +25,7 @@ namespace Conferences.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ConferenceDto>> GetById([FromRoute] int id)
