@@ -66,3 +66,23 @@ GET {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
 DELETE {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
 
 ###
+
+POST {{Conferences.API_HostAddress}}/register
+Content-Type: application/json
+
+{
+  "email": "test@interia.pl",
+  "password": "Password1!"
+}
+
+###
+
+POST {{Conferences.API_HostAddress}}/login
+Content-Type: application/json
+
+{
+  "email": "test@interia.pl",
+  "password": "Password1!"
+}
+
+###

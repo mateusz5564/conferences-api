@@ -1,4 +1,5 @@
 ﻿
+using Conferences.Domain.Entities;
 using Conferences.Domain.Repositories;
 using Conferences.Infrastructure.Persistence;
 using Conferences.Infrastructure.Repositories;
@@ -17,6 +18,9 @@ namespace Conferences.Infrastructure.Extensions
                     options.UseSqlServer(configuration.GetConnectionString("Default"),
                     x => x.UseNetTopologySuite()
                 ));
+
+            services.AddIdentityApiEndpoints<User>()
+                .AddEntityFrameworkStores<ConferencesDbContext>();
 
             services.AddScoped<ICategorySeeder, CategorySeeder>();
             services.AddScoped<IConferencesRepository, ConferencesRepository>();

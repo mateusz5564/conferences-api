@@ -3,6 +3,7 @@ using Conferences.Infrastructure.Seeders;
 using Conferences.Application.Extensions;
 using Serilog;
 using Conferences.API.Middlewares;
+using Conferences.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapIdentityApi<User>();
 
 app.UseAuthorization();
 

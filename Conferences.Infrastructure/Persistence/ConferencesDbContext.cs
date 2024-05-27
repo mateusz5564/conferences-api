@@ -1,10 +1,11 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Conferences.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Conferences.Infrastructure.Persistence
 {
-    internal class ConferencesDbContext(DbContextOptions<ConferencesDbContext> options) : DbContext(options)
+    internal class ConferencesDbContext(DbContextOptions<ConferencesDbContext> options) 
+        : IdentityDbContext<User>(options)
     {
         public DbSet<Conference> Conferences { get; set; }
         public DbSet<Category> Categories { get; set; }
