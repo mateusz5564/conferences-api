@@ -18,7 +18,9 @@ var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 var categorySeeder = scope.ServiceProvider.GetRequiredService<ICategorySeeder>();
+var userRoleSeeder = scope.ServiceProvider.GetRequiredService<IUserRoleSeeder>();
 await categorySeeder.Seed();
+await userRoleSeeder.Seed();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

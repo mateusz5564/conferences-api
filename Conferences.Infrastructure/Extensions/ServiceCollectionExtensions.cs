@@ -4,6 +4,7 @@ using Conferences.Domain.Repositories;
 using Conferences.Infrastructure.Persistence;
 using Conferences.Infrastructure.Repositories;
 using Conferences.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,9 +21,11 @@ namespace Conferences.Infrastructure.Extensions
                 ));
 
             services.AddIdentityApiEndpoints<User>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ConferencesDbContext>();
 
             services.AddScoped<ICategorySeeder, CategorySeeder>();
+            services.AddScoped<IUserRoleSeeder, UserRoleSeeder>();
             services.AddScoped<IConferencesRepository, ConferencesRepository>();
             services.AddScoped<IImportantDatesRepository, ImportantDatesRepository>();
         }
