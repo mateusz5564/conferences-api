@@ -32,11 +32,13 @@ Authorization: Bearer {{token}}
 ###
 
 DELETE {{Conferences.API_HostAddress}}/api/conferences/16
+Authorization: Bearer {{token}}
 
 ###
 
 PATCH {{Conferences.API_HostAddress}}/api/conferences/17
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "New title",
@@ -49,6 +51,7 @@ Content-Type: application/json
 
 POST {{Conferences.API_HostAddress}}/api/conferences/5/important-dates
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Send abstract",
@@ -66,6 +69,7 @@ GET {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
 ###
 
 DELETE {{Conferences.API_HostAddress}}/api/conferences/5/important-dates/7
+Authorization: Bearer {{token}}
 
 ###
 

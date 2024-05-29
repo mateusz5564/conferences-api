@@ -1,5 +1,7 @@
-﻿using Conferences.Domain.Entities;
+﻿using Conferences.Domain.Constants;
+using Conferences.Domain.Entities;
 using Conferences.Domain.Exceptions;
+using Conferences.Domain.Interfaces;
 using Conferences.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -9,7 +11,8 @@ namespace Conferences.Application.ImportantDates.Commands.DeleteImportantDateFor
     public class DeleteImportantDateForConferenceByIdHandler(
         ILogger<DeleteImportantDateForConferenceByIdHandler> logger,
         IConferencesRepository conferencesRepository,
-        IImportantDatesRepository importantDatesRepository)
+        IImportantDatesRepository importantDatesRepository,
+        IConferenceAuthorizationService conferenceAuthorizationService)
         : IRequestHandler<DeleteImportantDateForConferenceByIdCommand>
     {
         public async Task Handle(DeleteImportantDateForConferenceByIdCommand request,
@@ -22,6 +25,9 @@ namespace Conferences.Application.ImportantDates.Commands.DeleteImportantDateFor
 
             var conference = await conferencesRepository.GetByIdAsync(request.ConferenceId)
                 ?? throw new NotFoundException(nameof(Conference), request.ConferenceId.ToString());
+
+            if (!conferenceAuthorizationService.Authorize(conference, ResourceOperation.Update))
+                throw new ForbidException();
 
             var importantDate = conference.ImportantDates
                 .FirstOrDefault(i => i.Id == request.ImportantDateId)

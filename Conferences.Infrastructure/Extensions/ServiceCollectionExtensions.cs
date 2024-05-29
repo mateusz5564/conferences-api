@@ -1,6 +1,7 @@
-﻿
-using Conferences.Domain.Entities;
+﻿using Conferences.Domain.Entities;
+using Conferences.Domain.Interfaces;
 using Conferences.Domain.Repositories;
+using Conferences.Infrastructure.Authorization.Services;
 using Conferences.Infrastructure.Persistence;
 using Conferences.Infrastructure.Repositories;
 using Conferences.Infrastructure.Seeders;
@@ -28,6 +29,7 @@ namespace Conferences.Infrastructure.Extensions
             services.AddScoped<IUserRoleSeeder, UserRoleSeeder>();
             services.AddScoped<IConferencesRepository, ConferencesRepository>();
             services.AddScoped<IImportantDatesRepository, ImportantDatesRepository>();
+            services.AddScoped<IConferenceAuthorizationService, ConferenceAuthorizationService>();
         }
     }
 }

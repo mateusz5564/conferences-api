@@ -7,19 +7,24 @@ namespace Conferences.API.Middlewares
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-			try
-			{
-				await next.Invoke(context);   
-			}
-            catch(NotFoundException ex)
+            try
+            {
+                await next.Invoke(context);
+            }
+            catch (NotFoundException ex)
             {
                 logger.LogWarning(ex.Message);
 
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(ex.Message);
             }
-			catch (Exception ex)
-			{
+            catch (ForbidException ex)
+            {
+                context.Response.StatusCode = 403;
+                await context.Response.WriteAsync("Access forbidden");
+            }
+            catch (Exception ex)
+            {
                 logger.LogError(ex, ex.Message);
 
                 context.Response.StatusCode = 500;

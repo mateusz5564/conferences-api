@@ -4,12 +4,14 @@ using Conferences.Application.ImportantDates.Dtos;
 using Conferences.Application.ImportantDates.Queries.GetAllImportantDatesForConference;
 using Conferences.Application.ImportantDates.Queries.GetImportantDateForConferenceById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conferences.API.Controllers
 {
     [Route("api/conferences/{conferenceId}/important-dates")]
     [ApiController]
+    [Authorize]
     public class ImportantDatesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
