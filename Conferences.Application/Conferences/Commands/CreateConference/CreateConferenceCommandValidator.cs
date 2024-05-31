@@ -35,6 +35,12 @@ namespace Conferences.Application.Conferences.Commands.CreateConference
                 .GreaterThanOrEqualTo(-180)
                 .WithMessage("Latitude must more than -180 degrees.");
 
+            RuleForEach(dto => dto.ImportantDates).ChildRules(child =>
+            {
+                child.RuleFor(c => c.Name).Length(2, 100);
+                child.RuleFor(c => c.Date).NotEmpty();
+            });
+
             RuleFor(dto => dto.WebsiteUrl)
                 .Must(CustomValidators.BeAValidUrl)
                 .WithMessage("Website url must be a valid url");

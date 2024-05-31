@@ -21,7 +21,12 @@ namespace Conferences.Application.Conferences.Dtos
                     dest => dest.Location,
                     opt => opt.MapFrom(src =>
                         new Point(src.Location.Longitude, src.Location.Latitude) { SRID = 4326 })
-                 );
+                 )
+                .ForMember(
+                    dest => dest.ImportantDates,
+                    opt => opt.MapFrom(src => src.ImportantDates.Select(impd =>
+                        new ImportantDate { Name = impd.Name, Date = impd.Date })
+                ));
 
             CreateMap<UpdateConferenceCommand, Conference>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom((src, dest) => src.Title ?? dest.Title))
