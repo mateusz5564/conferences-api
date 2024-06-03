@@ -1,10 +1,13 @@
-﻿using Conferences.Application.Conferences.Dtos;
+﻿using Conferences.Application.Common;
+using Conferences.Application.Conferences.Dtos;
 using MediatR;
 
 namespace Conferences.Application.Conferences.Queries.GetAllConferences
 {
-    public class GetAllConferencesQuery : IRequest<IEnumerable<ConferenceDto>>
+    public class GetAllConferencesQuery : IRequest<PagedResult<ConferenceDto>>
     {
-        public string? searchPhrase { get; set; }
+        public string? SearchPhrase { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
     }
 }

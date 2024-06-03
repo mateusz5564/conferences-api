@@ -17,18 +17,26 @@ namespace Conferences.Infrastructure.Repositories
             return conferences;
         }
 
-        public async Task<IEnumerable<Conference>> GetAllMatchingAsync(string? searchPhrase)
+        public async Task<(IEnumerable<Conference>, int)> GetAllMatchingAsync(string? searchPhrase,
+            int pageSize,
+            int pageNumber)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
 
-            var conferences = await dbContext.Conferences
+            var baseQuery = dbContext.Conferences
                 .Include(x => x.Category)
                 .Include(x => x.ImportantDates)
                 .Where(c => searchPhrase == null || c.Title.ToLower().Contains(searchPhraseLower)
-                                                 || c.Description.ToLower().Contains(searchPhraseLower))
+                                                 || c.Description.ToLower().Contains(searchPhraseLower));
+
+            var totalCount = await baseQuery.CountAsync();
+
+            var conferences = await baseQuery
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
                 .ToListAsync();
 
-            return conferences;
+            return (conferences, totalCount);
         }
 
         public async Task<Conference?> GetByIdAsync(int id)
