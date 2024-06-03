@@ -5,5 +5,6 @@ namespace Conferences.Application.Conferences.Queries.GetAllConferences
 {
     public class GetAllConferencesQuery : IRequest<IEnumerable<ConferenceDto>>
     {
+        public string? searchPhrase { get; set; }
     }
 }

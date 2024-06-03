@@ -6,14 +6,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Conferences.Application.Conferences.Queries.GetAllConferences
 {
-    public class GetAllConferencesHandler(ILogger<GetAllConferencesHandler> logger, IMapper mapper, 
-        IConferencesRepository conferencesRepository) : IRequestHandler<GetAllConferencesQuery, IEnumerable<ConferenceDto>>
+    public class GetAllConferencesHandler(ILogger<GetAllConferencesHandler> logger, IMapper mapper,
+        IConferencesRepository conferencesRepository) : IRequestHandler<GetAllConferencesQuery,
+            IEnumerable<ConferenceDto>>
     {
-        public async Task<IEnumerable<ConferenceDto>> Handle(GetAllConferencesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ConferenceDto>> Handle(GetAllConferencesQuery request,
+            CancellationToken cancellationToken)
         {
             logger.LogInformation("Getting all conferences");
 
-            var conferences = await conferencesRepository.GetAllAsync();
+            var conferences = await conferencesRepository.GetAllMatchingAsync(request.searchPhrase);
             var conferencesDto = mapper.Map<IEnumerable<ConferenceDto>>(conferences);
 
             return conferencesDto;

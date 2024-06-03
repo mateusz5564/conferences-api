@@ -17,9 +17,10 @@ namespace Conferences.API.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<ConferenceDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ConferenceDto>>> GetAll(
+            [FromQuery] GetAllConferencesQuery query)
         {
-            var conferences = await mediator.Send(new GetAllConferencesQuery());
+            var conferences = await mediator.Send(query);
 
             return Ok(conferences);
         }

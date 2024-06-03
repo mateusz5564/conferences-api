@@ -17,6 +17,20 @@ namespace Conferences.Infrastructure.Repositories
             return conferences;
         }
 
+        public async Task<IEnumerable<Conference>> GetAllMatchingAsync(string? searchPhrase)
+        {
+            var searchPhraseLower = searchPhrase?.ToLower();
+
+            var conferences = await dbContext.Conferences
+                .Include(x => x.Category)
+                .Include(x => x.ImportantDates)
+                .Where(c => searchPhrase == null || c.Title.ToLower().Contains(searchPhraseLower)
+                                                 || c.Description.ToLower().Contains(searchPhraseLower))
+                .ToListAsync();
+
+            return conferences;
+        }
+
         public async Task<Conference?> GetByIdAsync(int id)
         {
             var conference = await dbContext.Conferences
