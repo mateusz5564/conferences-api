@@ -17,7 +17,8 @@ namespace Conferences.Application.Conferences.Queries.GetAllConferences
             logger.LogInformation("Getting all conferences");
 
             var (conferences, totalConferences) = await conferencesRepository
-                .GetAllMatchingAsync(request.SearchPhrase, request.PageSize, request.PageNumber);
+                .GetAllMatchingAsync(request.SearchPhrase, request.PageSize, request.PageNumber,
+                request.SortBy, request.SortDirection);
             var conferencesDto = mapper.Map<IEnumerable<ConferenceDto>>(conferences);
 
             var pagedConferencesDto = new PagedResult<ConferenceDto>(conferencesDto,

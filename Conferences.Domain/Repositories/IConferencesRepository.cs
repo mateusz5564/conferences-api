@@ -1,4 +1,5 @@
 ﻿
+using Conferences.Domain.Constants;
 using Conferences.Domain.Entities;
 
 namespace Conferences.Domain.Repositories
@@ -7,7 +8,7 @@ namespace Conferences.Domain.Repositories
     {
         Task<IEnumerable<Conference>> GetAllAsync();
         Task<(IEnumerable<Conference>, int)> GetAllMatchingAsync(string? searchPhrase, int pageSize,
-            int pageNumber);
+            int pageNumber, string? sortBy, SortDirection? sortDirection);
         Task<Conference?> GetByIdAsync(int id);
         Task<int> CreateAsync(Conference conference);
         Task DeleteAsync(Conference conference);

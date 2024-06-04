@@ -1,7 +1,9 @@
-﻿using Conferences.Domain.Entities;
+﻿using Conferences.Domain.Constants;
+using Conferences.Domain.Entities;
 using Conferences.Domain.Repositories;
 using Conferences.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Conferences.Infrastructure.Repositories
 {
@@ -19,7 +21,9 @@ namespace Conferences.Infrastructure.Repositories
 
         public async Task<(IEnumerable<Conference>, int)> GetAllMatchingAsync(string? searchPhrase,
             int pageSize,
-            int pageNumber)
+            int pageNumber,
+            string? sortBy,
+            SortDirection? sortDirection)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
 
@@ -30,6 +34,19 @@ namespace Conferences.Infrastructure.Repositories
                                                  || c.Description.ToLower().Contains(searchPhraseLower));
 
             var totalCount = await baseQuery.CountAsync();
+
+            if (sortBy != null)
+            {
+                var columnsSelector = new Dictionary<string, Expression<Func<Conference, object>>>
+                {
+                    { nameof(Conference.Title), c => c.Title },
+                    { nameof(Conference.StartDate), c => c.StartDate },
+                    { nameof(Conference.Category) + nameof(Conference.Category.Name), c => c.Category.Name },
+                };
+
+                baseQuery = sortDirection == SortDirection.Desc ? baseQuery.OrderByDescending(columnsSelector[sortBy])
+                    : baseQuery.OrderBy(columnsSelector[sortBy]);
+            }
 
             var conferences = await baseQuery
                 .Skip(pageSize * (pageNumber - 1))
