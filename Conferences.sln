@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.API", "Conferences.API\Conferences.API.csproj", "{CCB18B08-0F45-4468-A660-922D20DE37D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.API", "Conferences.API\Conferences.API.csproj", "{CCB18B08-0F45-4468-A660-922D20DE37D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Domain", "Conferences.Domain\Conferences.Domain.csproj", "{7CAE3E7F-4712-4100-B8C7-2D93EF2696F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Domain", "Conferences.Domain\Conferences.Domain.csproj", "{7CAE3E7F-4712-4100-B8C7-2D93EF2696F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Infrastructure", "Conferences.Infrastructure\Conferences.Infrastructure.csproj", "{06D3A9D7-C34F-4388-A946-0E68D9BF0D63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Infrastructure", "Conferences.Infrastructure\Conferences.Infrastructure.csproj", "{06D3A9D7-C34F-4388-A946-0E68D9BF0D63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Application", "Conferences.Application\Conferences.Application.csproj", "{397A8CCC-6017-43A7-AAD3-013F9E222870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Application", "Conferences.Application\Conferences.Application.csproj", "{397A8CCC-6017-43A7-AAD3-013F9E222870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Application.Tests", "Conferences.Application.Tests\Conferences.Application.Tests.csproj", "{F4677A2B-E200-46D8-A550-FC6201F5C47E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{397A8CCC-6017-43A7-AAD3-013F9E222870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{397A8CCC-6017-43A7-AAD3-013F9E222870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{397A8CCC-6017-43A7-AAD3-013F9E222870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4677A2B-E200-46D8-A550-FC6201F5C47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4677A2B-E200-46D8-A550-FC6201F5C47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4677A2B-E200-46D8-A550-FC6201F5C47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4677A2B-E200-46D8-A550-FC6201F5C47E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
