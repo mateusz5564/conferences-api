@@ -24,12 +24,14 @@ namespace Conferences.Application.Conferences.Commands.CreateConference
                 .WithMessage("End date must be after start date");
 
             RuleFor(dto => dto.Location.Longitude)
+                .NotEmpty()
                 .LessThanOrEqualTo(180)
                 .WithMessage("Longitude must less than 180 degrees.")
                 .GreaterThanOrEqualTo(-180)
                 .WithMessage("Longitude must more than -180 degrees.");
 
             RuleFor(dto => dto.Location.Latitude)
+                .NotEmpty()
                 .LessThanOrEqualTo(180)
                 .WithMessage("Latitude must less than 180 degrees.")
                 .GreaterThanOrEqualTo(-180)
