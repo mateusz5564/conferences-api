@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Conferences.Application\Conferences.Application.csproj" />
+    <ProjectReference Include="..\..\src\Conferences.Application\Conferences.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

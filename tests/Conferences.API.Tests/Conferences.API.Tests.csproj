@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Conferences.API\Conferences.API.csproj" />
+    <ProjectReference Include="..\..\src\Conferences.API\Conferences.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>
