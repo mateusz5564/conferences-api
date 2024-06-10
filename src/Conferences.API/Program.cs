@@ -5,6 +5,7 @@ using Serilog;
 using Conferences.API.Middlewares;
 using Conferences.Domain.Entities;
 using Conferences.API.Extensions;
+using Conferences.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,10 @@ builder.Services.AddApplication();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
+
+var databaseMigrator = scope.ServiceProvider.GetRequiredService<IDatabaseMigrator>();
+await databaseMigrator.ApplyMigrations();
+
 var categorySeeder = scope.ServiceProvider.GetRequiredService<ICategorySeeder>();
 var userRoleSeeder = scope.ServiceProvider.GetRequiredService<IUserRoleSeeder>();
 await categorySeeder.Seed();

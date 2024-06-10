@@ -25,6 +25,7 @@ namespace Conferences.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ConferencesDbContext>();
 
+            services.AddScoped<IDatabaseMigrator, DatabaseMigrator>();
             services.AddScoped<ICategorySeeder, CategorySeeder>();
             services.AddScoped<IUserRoleSeeder, UserRoleSeeder>();
             services.AddScoped<IConferencesRepository, ConferencesRepository>();
