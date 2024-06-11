@@ -1,6 +1,7 @@
 ﻿using Conferences.Application.Conferences.Commands.CreateConference;
 using Conferences.Application.Conferences.Commands.DeleteConference;
 using Conferences.Application.Conferences.Commands.UpdateConference;
+using Conferences.Application.Conferences.Commands.UploadConferenceLogo;
 using Conferences.Application.Conferences.Dtos;
 using Conferences.Application.Conferences.Queries.GetAllConferences;
 using Conferences.Application.Conferences.Queries.GetConferenceById;
@@ -59,6 +60,23 @@ namespace Conferences.API.Controllers
         {
             command.Id = id;
             await mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPost("{id}/logo")]
+        public async Task<IActionResult> UploadLogo([FromRoute] int id, IFormFile file)
+        {
+            using var stream = file.OpenReadStream();
+
+            var command = new UploadConferenceLogoCommand()
+            {
+                ConferenceId = id,
+                Filename = $"{id}-{file.FileName}",
+                File = stream,
+            };
+
+            await mediator.Send(command);
+
             return NoContent();
         }
     }

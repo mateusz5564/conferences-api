@@ -2,9 +2,11 @@
 using Conferences.Domain.Interfaces;
 using Conferences.Domain.Repositories;
 using Conferences.Infrastructure.Authorization.Services;
+using Conferences.Infrastructure.Configuration;
 using Conferences.Infrastructure.Persistence;
 using Conferences.Infrastructure.Repositories;
 using Conferences.Infrastructure.Seeders;
+using Conferences.Infrastructure.Storage;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +33,9 @@ namespace Conferences.Infrastructure.Extensions
             services.AddScoped<IConferencesRepository, ConferencesRepository>();
             services.AddScoped<IImportantDatesRepository, ImportantDatesRepository>();
             services.AddScoped<IConferenceAuthorizationService, ConferenceAuthorizationService>();
+
+            services.Configure<BlobStorageSettings>(configuration.GetSection("BlobStorage"));
+            services.AddScoped<IBlobStorageService, BlobStorageService>();
         }
     }
 }

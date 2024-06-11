@@ -2,6 +2,7 @@
 using Conferences.Application.Conferences.Dtos;
 using Conferences.Domain.Entities;
 using Conferences.Domain.Exceptions;
+using Conferences.Domain.Interfaces;
 using Conferences.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -9,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Conferences.Application.Conferences.Queries.GetConferenceById
 {
     public class GetConferenceByIdHandler(ILogger<GetConferenceByIdHandler> logger, IMapper mapper,
-        IConferencesRepository conferencesRepository) : IRequestHandler<GetConferenceByIdQuery, ConferenceDto>
+        IConferencesRepository conferencesRepository,
+        IBlobStorageService blobStorageService) : IRequestHandler<GetConferenceByIdQuery, ConferenceDto>
     {
         public async Task<ConferenceDto> Handle(GetConferenceByIdQuery request, CancellationToken cancellationToken)
         {
@@ -20,6 +22,8 @@ namespace Conferences.Application.Conferences.Queries.GetConferenceById
 
             var conferenceDto = mapper.Map<ConferenceDto>(conference);
 
+            conferenceDto.LogoUrl = blobStorageService.GetBlobSasUrl(conference.LogoUrl);
+            
             return conferenceDto;
         }
     }
