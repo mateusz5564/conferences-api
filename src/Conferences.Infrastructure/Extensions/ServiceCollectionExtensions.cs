@@ -20,7 +20,11 @@ namespace Conferences.Infrastructure.Extensions
         {
             services.AddDbContext<ConferencesDbContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("Default"),
-                    x => x.UseNetTopologySuite()
+                    builder =>
+                    {
+                        builder.UseNetTopologySuite();
+                        builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                    }
                 ));
 
             services.AddIdentityApiEndpoints<User>()
